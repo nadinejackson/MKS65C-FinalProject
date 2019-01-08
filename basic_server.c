@@ -3,8 +3,8 @@
 
 int play(char * buf, char * response, int locations[], int vals[], int * undealt)
 {
-  int chosen[3];
-  if(chosen = letters_to_vals(buf, locations, vals))
+  int * chosen = malloc(3 * sizeof(int));
+  if(letters_to_vals(buf, locations, vals, chosen))
     {
       if (is_set(chosen))
 	{
@@ -30,7 +30,7 @@ int main() {
   from_client = server_handshake( &to_client );
 
   swap(vals); //initial swap
-  deal_initial(vals, locations, &undealt);
+  deal_initial(vals, locations, undealt);
   display(vals, locations);
   while(1)
     {
@@ -38,10 +38,13 @@ int main() {
 	{
 	  if (read(from_client, buf, 1024 * sizeof(char)))
 	    {
+	      perror("error");
+	      printf("received %s\n", buf);
 	      play(buf, response, locations, vals, undealt);
 	      write(to_client, response, 1024 * sizeof(char));
 	    }
 	  else
+	    printf("goodbye");
 	    exit(0);
 	}
       else

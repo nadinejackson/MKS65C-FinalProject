@@ -14,6 +14,7 @@ int main() {
       fscanf(stdin, "%[^\n]s", line);
       fscanf(stdin, "%c", junk);
       write(to_server, line, 1024 * sizeof(char));
+      perror("error");
       if (read(from_server, line, 1024 * sizeof(char)))
 	printf("%s\n", line);
       else
