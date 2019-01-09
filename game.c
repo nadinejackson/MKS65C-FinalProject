@@ -6,13 +6,25 @@
 #include <sys/stat.h>
 #include <string.h>
 #include <errno.h>
-
+#include <time.h>
 
 void swap(int vals[81]) //initialize arrays to values 0-80 in random order
 {
   int c = 81;
   while(c--)
     vals[c] = c; //populate with values in order
+  srand(time(NULL));
+  int r;
+  int i = rand();
+  c = 81 * 81;
+  while(c--);
+  {
+      r = vals[c % 81];
+      vals[c % 81] = vals[i];
+      vals[i] = r;
+      i = rand();
+      //printf("%d\n", i);
+  }
   //randomly swap until deck is randomized
 }
 int * letters_to_vals(char * input, int locations[], int vals[], int * chosen)
