@@ -10,8 +10,8 @@
 
 void swap(int vals[81]) //initialize arrays to values 0-80 in random order
 {
-  int c = 80;
-  while(c)
+  int c = 81;
+  while(c--)
     vals[c] = c; //populate with values in order
   //randomly swap until deck is randomized
 }
@@ -34,9 +34,10 @@ int is_set(int chosen[])
 void replace(int vals[], int locations[], int chosen[], int * undealt)
 {
 }
-void display(int vals[], int locations[])
+char * display(int vals[], int locations[])
 {
-  printf("the cards go here[]\n");
+  char * placeholder = "the cards go here[]\n";
+  return placeholder;
 }
 void deal_initial(int vals[], int locations[], int * undealt)
 {
