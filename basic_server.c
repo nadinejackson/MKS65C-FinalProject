@@ -19,9 +19,9 @@ int play(char * buf, char * response, int locations[], int vals[], int * undealt
 }
 int main() {
   
-  int locations[15];
-  int vals[81];
-  int * undealt = 0;
+  //int locations[15];
+  //int vals[81];
+  //int * undealt = 0;
   int pid = getpid();
   int to_client;
   int from_client;
@@ -29,9 +29,9 @@ int main() {
   char * response = malloc(1024 * sizeof(char));
   from_client = server_handshake( &to_client );
 
-  swap(vals); //initial swap
-  deal_initial(vals, locations, undealt);
-  display(vals, locations);
+  //swap(vals); //initial swap
+  //deal_initial(vals, locations, undealt);
+  //strcpy(response, display(vals, locations));
   while(1)
     {
       if (getpid() - pid)
@@ -40,8 +40,8 @@ int main() {
 	    {
 	      perror("error");
 	      printf("received %s\n", buf);
-	      play(buf, response, locations, vals, undealt);
-	      write(to_client, response, 1024 * sizeof(char));
+	      //play(buf, response, locations, vals, undealt);
+	      write(to_client, buf, 1024 * sizeof(char));
 	    }
 	  else
 	    printf("goodbye");
