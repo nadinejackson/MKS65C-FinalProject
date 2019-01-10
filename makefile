@@ -18,4 +18,5 @@ game.o: game.c
 	gcc -c game.c
 clean:
 	rm *.o
-	rm *~
+	rm server
+	rm client

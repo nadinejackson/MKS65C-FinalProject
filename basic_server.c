@@ -2,28 +2,32 @@
 #include "game.c"
 void play(char * buf, int vals[])
 {
-  strcat(buf, "yes, this is working.");
+  char temp[10];
+  strcat(buf, " yes, this is working.\n");
   int i;
-  //for (i = 0; i < 81; i++)
-  //printf("[%d]\n", vals[i]);
+  for (i = 0; i < 81; i++)
+    {
+      sprintf(temp, "[%d]\n", vals[i]);
+      strcat(buf, temp);
+      printf("[%d]\n", vals[i]);
+    }
 }
-
 int main()
 {
-  int vals[81];
+  int deck[81];
   int pid = getpid();
   int to_client;
   int from_client;
   char * buf = malloc(1024 * sizeof(char));
   from_client = server_handshake( &to_client );
-  swap(vals);
   while(1)
     {
       if (getpid() - pid)
 	{
 	  if (read(from_client, buf, 1024 * sizeof(char)))
 	    {
-	      play(buf, vals);
+	      swap(deck);
+	      play(buf, deck);
 	      write(to_client, buf, 1024 * sizeof(char));
 	    }
 	  else

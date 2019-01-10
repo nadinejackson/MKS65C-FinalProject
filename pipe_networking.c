@@ -16,8 +16,8 @@ int server_handshake(int *to_client) {
   
   //create wkp and wait for connection
   mkfifo("waluigi", 0644);
-  perror("pls tell me everything's okay");
-  printf("pipe created\n");
+  //perror("pls tell me everything's okay");
+  //printf("pipe created\n");
   
   //client creates "private" fifo
 
@@ -25,9 +25,9 @@ int server_handshake(int *to_client) {
   
   //server recieves client's message and removes the wkp
   int from_client = open("waluigi", O_RDONLY, 0644);
-  printf("pipe opened: %d\n", from_client);
+  //printf("pipe opened: %d\n", from_client);
   read(from_client, buf, 1024 * sizeof(char));
-  printf("path name: %s\n", buf);  
+  //printf("path name: %s\n", buf);  
   remove("./waluigi");
   
 
@@ -39,14 +39,14 @@ int server_handshake(int *to_client) {
       //server connects to client and sends acknowledgement
       int tc = open(buf, O_WRONLY, 0644);
       *to_client = tc;
-      printf("acknowledgement to write: %s\n", message);
+      //printf("acknowledgement to write: %s\n", message);
       write(tc, message, 1024 * sizeof(char));
 
       //client recieves server's message, removes private fifo
 
       //client sends response to server
       read(from_client, buf, 1024 * sizeof(char));
-      printf("second message recieved: %s\n", buf);  
+      //printf("second message recieved: %s\n", buf);  
 
       free(buf);
       return from_client;
@@ -61,14 +61,14 @@ int client_handshake(int *to_server) {
   
   //client creates "private" fifo
   mkfifo(path, 0644);
-  printf("response pipe created\n");
+  //printf("response pipe created\n");
 
   
   //client sends message to server
   int ts = open("./waluigi", O_WRONLY, 0644);
   *to_server = ts;
   write(ts, path, 1024 * sizeof(char));
-  printf("path name written: %s\n", path);  
+  //printf("path name written: %s\n", path);  
   int from_server = open(path, O_RDONLY);
   //server recieves client's message and removes the wkp
   
@@ -76,8 +76,8 @@ int client_handshake(int *to_server) {
 
   //client recieves server's message, removes its private fifo
   read(from_server, buf, 1024 * sizeof(char));
-  perror("error reading");
-  printf("got a message from the server and it was this: %s\n", buf);
+  //perror("error reading");
+  //printf("got a message from the server and it was this: %s\n", buf);
   remove("waaah");
 
   //client sends a response to the server

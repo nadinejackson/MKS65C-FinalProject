@@ -8,24 +8,31 @@
 #include <errno.h>
 #include <time.h>
 
-void swap(int vals[81]) //initialize arrays to values 0-80 in random order
+void swap(int vals[]) //initialize arrays to values 0-80 in random order
 {
+  
+  //printf("the swap fxn has started\n");
   int c = 81;
   while(c--)
     vals[c] = c; //populate with values in order
   srand(time(NULL));
   int r;
-  int i = rand();
-  c = 81 * 81;
-  while(c--);
-  {
+  int i;
+  c = 81;
+  //printf("about to loop, %d\n", c);
+  while(c)
+    {
+      //printf("hello is anyone here? %d\n", c);
+      i = rand() % 81;
       r = vals[c % 81];
       vals[c % 81] = vals[i];
-      vals[i] = r;
-      i = rand();
-      //printf("%d\n", i);
-  }
+      //vals[i] = r;
+      c--;
+    }
+  //printf("it yeeted for some reason\n");
   //randomly swap until deck is randomized
+  
+  
 }
 int * letters_to_vals(char * input, int locations[], int vals[], int * chosen)
 {

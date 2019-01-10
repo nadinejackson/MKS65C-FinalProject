@@ -18,7 +18,10 @@ int main() {
       if (read(from_server, line, 1024 * sizeof(char)))
 	printf("%s\n", line);
       else
-	exit(0);
+	{
+	  perror("error reading");
+	  exit(0);
+	}
     }
   return 0;
 }
