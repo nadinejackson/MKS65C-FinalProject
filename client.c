@@ -11,7 +11,7 @@ int main() {
   write(to_server, "let's start", 1024 * sizeof(char));
   while(1)
     {
-      perror("error");
+      //perror("error");
       if (read(from_server, line, 1024 * sizeof(char)))
 	printf("%s\n", line);
       else

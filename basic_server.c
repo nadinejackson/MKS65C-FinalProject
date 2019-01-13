@@ -6,10 +6,16 @@ void play(char * buf, int vals[], int locations[])
   char temp[10];
   if (input_to_board_positions(buf, positions))
     {
-      strcat(buf, " yes, that's a set. gg.\n");
+      //strcat(buf, " yes, that's an input. gg.\n");
+      if(set_check(vals[ locations[ positions[0] ] ],
+		   vals[ locations[ positions[1] ] ],
+		   vals[ locations[ positions[2] ] ]))
+	strcat(buf, " yes, that's a set. gg.\n");
+      else
+	strcat(buf, " no, that wasn't a set. bg.\n");
     }
   else
-    strcat(buf, " that wasn't a set, bro.\n");
+    strcat(buf, " that wasn't an input, bro.\n");
   print_twelve(locations, vals, buf);
 }
 int main()
@@ -25,8 +31,8 @@ int main()
   from_client = server_handshake( &to_client );
   swap(deck);
   int i;
-  for(i = 0; i < 81; i++)
-    printf("[%d]\n", deck[i]);
+  //for(i = 0; i < 81; i++)
+  //printf("[%d]\n", deck[i]);
   deal_initial(locations);
   while(1)
     {
