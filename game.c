@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,14 +10,14 @@
 #include <errno.h>
 #include <time.h>
 
-char * KEYBOARD = "QWERASDFZXCVTGB";
-int positions[3];
+char * KEYBOARD = "qwerasdfzxcvtgb";
+//int positions[3];
 char board[100];
 
-int * input_to_board_positions (char * input) {
-    if ( strlen(input) != 3 ) {
-        printf("Invalid input! A set must be of 3 cards.\n");
-        return NULL;
+int input_to_board_positions (char * input, int positions[]) {
+  if ( strlen(input) != 3 || input[0] == input[1]) {
+      //printf("Invalid input! A set must be of 3 cards.\n");
+        return 0;
     }
 
     for ( int i=0 ; i<3 ; i++ ) { // for every position
@@ -29,19 +30,19 @@ int * input_to_board_positions (char * input) {
             positions[i] = position;
         }
         else { // no match found
-            printf("A letter in the input is not within the board!\n");
-            return NULL;
+	  //printf("A letter in the input is not within the board!\n");
+            return 0;
         }
         
     }
     // done finding all matches
-    printf("|%d|%d|%d|\n", positions[0], positions[1], positions[2]);
-
-    return positions;
+    //printf("positions: |%d|%d|%d|\n", positions[0], positions[1], positions[2]);
+    return 1;
 }
 
 int set_check_helper (int a, int b, int c) {
-    if (a == b && b == c) // therefore a=c=b
+  printf("%d %d %d\n", a, b, c);
+  if (a == b && b == c) // therefore a=c=b
         return 1; // true
     else if ( a!=b && b!=c && a!=c ) //all different
         return 1;
@@ -140,6 +141,7 @@ void swap(int vals[])
       i = rand() % 81;
       r = vals[c % 81];
       vals[c % 81] = vals[i];
+      vals[i] = r;
       c--;
     }
 }

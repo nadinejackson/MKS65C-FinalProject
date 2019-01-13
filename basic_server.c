@@ -2,15 +2,14 @@
 #include "game.c"
 void play(char * buf, int vals[], int locations[])
 {
+  int positions[3];
   char temp[10];
-  strcat(buf, " yes, this is working.\ncards:\n");
-  /*  int i;
- for (i = 0; i < 12; i++)
+  if (input_to_board_positions(buf, positions))
     {
-      sprintf(temp, "[%d]\n", vals[locations[i]]);
-      strcat(buf, temp);
-      printf("[%d]\n", vals[locations[i]]);
-      }*/
+      strcat(buf, " yes, that's a set. gg.\n");
+    }
+  else
+    strcat(buf, " that wasn't a set, bro.\n");
   print_twelve(locations, vals, buf);
 }
 int main()
@@ -25,6 +24,9 @@ int main()
   char * buf = malloc(1024 * sizeof(char));
   from_client = server_handshake( &to_client );
   swap(deck);
+  int i;
+  for(i = 0; i < 81; i++)
+    printf("[%d]\n", deck[i]);
   deal_initial(locations);
   while(1)
     {
