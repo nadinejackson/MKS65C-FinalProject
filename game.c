@@ -68,21 +68,51 @@ int set_check (int a, int b, int c) {
     
     return 1;
 }
+void symbol(int d, char * buf)
+{
+  char temp[10];
+  //colors
+  if (d % 3 == 0)
+    sprintf(temp, "%c[32m", (char) 27);
+  else if ( d % 3 == 1)
+    sprintf(temp, "%c[31m", (char) 27);
+  else
+    sprintf(temp, "%c[35m", (char) 27);
+  strcat(buf, temp);
 
+  d /= 3;
+	      
+  //shading
+  if (d % 3 == 0)
+    sprintf(temp, "%c[7m", (char) 27);
+  else if ( d % 3 == 1)
+    sprintf(temp, "%c[4m", (char) 27);
+  strcat(buf, temp);
+
+  d/= 3;	      
+
+  //shape
+  if (d % 3 == 0)
+    strcat(buf, "O");		
+  else if ( d % 3 == 1)
+    strcat(buf, "^");
+  else
+    strcat(buf, "~");
+
+  d /= 3;
+
+}
 void print_twelve (int * locations , int * values, char * buf) {
 
     char temp[100];
 
     int nums[12];
-    int i, j;
-    for ( i=0 ; i<3 ; i++ ) {
-        for ( j=0 ; j<4 ; j++ ) {
-            sprintf( temp, "%d\t", values[ locations[4*i+j] ] );
-            strcat(buf, temp);
-            nums[4*i + j] = values[locations[4*i+j]];
-        }
-        strcat(buf, "\n");
-    }
+    int i;
+    for ( i=0 ; i<12 ; i++ )
+      {
+	nums[i] = values[locations[i]];
+      }
+    
     //strcat(buf, " _   _   _   _ \n");
     int a,b,c,d;
     
@@ -97,27 +127,27 @@ void print_twelve (int * locations , int * values, char * buf) {
 
 	      d = nums[4 * a + c];
 
-	      //colors
 	      if (d % 3 == 0)
-		sprintf(temp, "%c[32m", (char) 27);
-	      else if ( d % 3 == 1)
-		sprintf(temp, "%c[31m", (char) 27);
+		{
+		  if (b == 1)
+		    symbol( d / 3, buf );
+		  else
+		    strcat(buf, " ");
+		}
+	      else if (d % 3 == 1)
+		{
+		  if (b == 2)
+		    strcat(buf, " ");
+		  else
+		    symbol(d / 3, buf);
+		}
 	      else
-		sprintf(temp, "%c[35m", (char) 27);
-	      strcat(buf, temp);
+		symbol(d / 3, buf);
 
 	      d /= 3;
 	      
-	      //shape
-	      if (d % 3 == 0)
-		strcat(buf, "O");		
-	      else if ( d % 3 == 1)
-		strcat(buf, "^");
-	      else
-		strcat(buf, "~");
-	    
 	      //card edges (white)
-	      sprintf(temp, "%c[37m", (char) 27);
+	      sprintf(temp, "%c[0m", (char) 27);
 	      strcat(buf, temp);
 	      strcat(buf, "| ");
 	    }
