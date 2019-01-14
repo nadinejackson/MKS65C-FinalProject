@@ -41,7 +41,7 @@ int input_to_board_positions (char * input, int positions[]) {
 }
 
 int set_check_helper (int a, int b, int c) {
-  printf("%d %d %d\n", a, b, c);
+  //printf("%d %d %d\n", a, b, c);
   if (a == b && b == c) // therefore a=c=b
         return 1; // true
     else if ( a!=b && b!=c && a!=c ) //all different
