@@ -26,6 +26,11 @@ int write_line(int * place, int * locations, int p)
 
       if (p)
 	ptr[15 + p]++;
+      else
+	{
+	  ptr[16] = 0;
+	  ptr[17] = 0;
+	}
       return 0;
     }
   
