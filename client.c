@@ -8,7 +8,7 @@ int main() {
   char * junk = malloc(sizeof(char));
   char * line = malloc(1024 * sizeof(char));
   from_server = client_handshake( &to_server );
-  write(to_server, "let's start", 1024 * sizeof(char));
+  write(to_server, "h", 1024 * sizeof(char));
   while(1)
     {
       //perror("error");
@@ -22,7 +22,7 @@ int main() {
 	  perror("error reading");
 	  exit(0);
 	}
-      printf("hello. please type the letters in a set and press enter.\n");
+      printf("Please type the letters corresponding to a set and press enter.\nEnter r to refresh.\nEnter h for help.\n");
       fscanf(stdin, "%[^\n]s", line);
       fscanf(stdin, "%c", junk);
       write(to_server, line, 1024 * sizeof(char));

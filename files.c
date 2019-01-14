@@ -14,7 +14,8 @@
 			
 int write_line(int * place, int * locations, int p)
 {
-  int got = shmget(KEY, sizeof(int), 0644 | IPC_CREAT); //shared memory
+  int got = shmget(KEY, 32 * sizeof(int), 0); //shared memory
+  perror("error with shmget");
   int *ptr = shmat(got, 0, 0); //shared memory pointer
   int c = 15;
   if(*place - *(ptr+15) > 0)

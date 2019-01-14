@@ -7,22 +7,34 @@ void play(char * buf, int vals[], int locations[], int place[])
 {
   int positions[3];
   char temp[10];
-  if (input_to_board_positions(buf, positions))
+  if(strcmp(buf, "r") && strcmp(buf, "h"))
     {
-      //strcat(buf, " yes, that's an input. gg.\n");
-      if(set_check(vals[ locations[ positions[0] ] ],
-		   vals[ locations[ positions[1] ] ],
-		   vals[ locations[ positions[2] ] ]))
-
+      if (input_to_board_positions(buf, positions))
 	{
-	  strcat(buf, " yes, that's a set. gg.\n");
-	  replace(locations, place, positions);
+	  //strcat(buf, " yes, that's an input. gg.\n");
+	  if(set_check(vals[ locations[ positions[0] ] ],
+		       vals[ locations[ positions[1] ] ],
+		       vals[ locations[ positions[2] ] ]))
+
+	    {
+	      //if(write_line(place, locations, 1))
+	      //{
+		  strcpy(buf, "You found a set! Good job! Plus one point.\n");
+		  replace(locations, place, positions);
+		  //}
+		  //else
+		//strcpy(buf, "The other player beat you to it!\n");
+	    }
+	  else
+	    strcpy(buf, "No, that wasn't a set. bg.\n");
 	}
       else
-	strcat(buf, " no, that wasn't a set. bg.\n");
+	strcpy(buf, "That wasn't a valid input, bro.\n");
     }
-  else
-    strcat(buf, " that wasn't an input, bro.\n");
+  else if(!strcmp(buf, "h"))
+    strcpy(buf, "Enter three letters on the keyboard corresponding to the position of each card on the board as follows (no spaces):\nq w e r [t]\na s d f [g]\nz x c v [b]\n");
+  else 
+    strcpy(buf, "Refreshed.\n");
   print_twelve(locations, vals, buf);
 }
 int main()
