@@ -83,38 +83,49 @@ void print_twelve (int * locations , int * values, char * buf) {
         }
         strcat(buf, "\n");
     }
-    strcat(buf, " -  -  -  - \n");
-    int a,b,c;
+    //strcat(buf, " _   _   _   _ \n");
+    int a,b,c,d;
     
     for(a = 0; a < 3; a++)
       {
-      for(b = 0; b < 4; b++)
+      for(b = 0; b < 3; b++)
 	{
-	  //card edges
-	  strcat(buf, "|");
+	  for(c = 0; c < 4; c++)
+	    {
+	      //card edges
+	      strcat(buf, "|");
 
-	  c = nums[4 * a + b];
+	      d = nums[4 * a + c];
 
-	  //colors
-	  if (c % 3 == 0)
-	    sprintf(temp, "%c[32m", (char) 27);
-	  else if ( c % 3 == 1)
-	    sprintf(temp, "%c[31m", (char) 27);
-	  else
-	    sprintf(temp, "%c[35m", (char) 27);
-	  strcat(buf, temp);
+	      //colors
+	      if (d % 3 == 0)
+		sprintf(temp, "%c[32m", (char) 27);
+	      else if ( d % 3 == 1)
+		sprintf(temp, "%c[31m", (char) 27);
+	      else
+		sprintf(temp, "%c[35m", (char) 27);
+	      strcat(buf, temp);
 
-	  //shape
-	  strcat(buf, "O");
-
-	  //card edges (white)
-	  sprintf(temp, "%c[37m", (char) 27);
-	  strcat(buf, temp);
-	  strcat(buf, "|");
+	      d /= 3;
+	      
+	      //shape
+	      if (d % 3 == 0)
+		strcat(buf, "O");		
+	      else if ( d % 3 == 1)
+		strcat(buf, "^");
+	      else
+		strcat(buf, "~");
+	    
+	      //card edges (white)
+	      sprintf(temp, "%c[37m", (char) 27);
+	      strcat(buf, temp);
+	      strcat(buf, "| ");
+	    }
+	  strcat(buf, "\n");
 	}
       strcat(buf, "\n");
       }
-    strcat(buf, " -  -  -  - \n");
+    //strcat(buf, " -  -  -  - \n");
 }
 
 char * print_fifteen (int * locations , int * values) {
