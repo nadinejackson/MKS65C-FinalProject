@@ -31,7 +31,7 @@ int main()
   int from_client;
   int place[1];
   place[0] = 12;
-  char * buf = malloc(1024 * sizeof(char));
+  char * buf = malloc(2048 * sizeof(char));
   from_client = server_handshake( &to_client );
   swap(deck);
   int i;

@@ -72,17 +72,49 @@ int set_check (int a, int b, int c) {
 void print_twelve (int * locations , int * values, char * buf) {
 
     char temp[100];
-    strcpy(board, "");
 
+    int nums[12];
     int i, j;
     for ( i=0 ; i<3 ; i++ ) {
         for ( j=0 ; j<4 ; j++ ) {
             sprintf( temp, "%d\t", values[ locations[4*i+j] ] );
             strcat(buf, temp);
-            
+            nums[4*i + j] = values[locations[4*i+j]];
         }
         strcat(buf, "\n");
     }
+    strcat(buf, " -  -  -  - \n");
+    int a,b,c;
+    
+    for(a = 0; a < 3; a++)
+      {
+      for(b = 0; b < 4; b++)
+	{
+	  //card edges
+	  strcat(buf, "|");
+
+	  c = nums[4 * a + b];
+
+	  //colors
+	  if (c % 3 == 0)
+	    sprintf(temp, "%c[32m", (char) 27);
+	  else if ( c % 3 == 1)
+	    sprintf(temp, "%c[31m", (char) 27);
+	  else
+	    sprintf(temp, "%c[35m", (char) 27);
+	  strcat(buf, temp);
+
+	  //shape
+	  strcat(buf, "O");
+
+	  //card edges (white)
+	  sprintf(temp, "%c[37m", (char) 27);
+	  strcat(buf, temp);
+	  strcat(buf, "|");
+	}
+      strcat(buf, "\n");
+      }
+    strcat(buf, " -  -  -  - \n");
 }
 
 char * print_fifteen (int * locations , int * values) {
