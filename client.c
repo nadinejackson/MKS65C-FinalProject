@@ -13,7 +13,10 @@ int main() {
     {
       //perror("error");
       if (read(from_server, line, 1024 * sizeof(char)))
-	printf("%s\n", line);
+	{
+	  printf("\033[2J\033[;H");
+	  printf("%s\n", line);
+	}
       else
 	{
 	  perror("error reading");
