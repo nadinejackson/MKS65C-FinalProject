@@ -1,0 +1,7 @@
+Jan 13
+Raymond
+	The game functions are in game2.c.
+Nadine
+	game.c and game2.c are combined.
+	The server checks for correct sets and replaces cards.
+	README is created.
