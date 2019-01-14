@@ -24,10 +24,10 @@ void create()
   int r;
   int v;
   int got = shmget(KEY, 32 * sizeof(int), 0644 | IPC_CREAT); //make shared memory
-  perror("error getting shared memory");
+  //perror("error getting shared memory");
   int *ptr = shmat(got, 0, 0);
   *ptr = 0;
-  int semd = semget(KEY, 1, IPC_CREAT | IPC_EXCL | 0644); //semd is the semaphore descriptor (make semaphore)
+  int semd = semget(KEY, 1, IPC_CREAT | 0644); //semd is the semaphore descriptor (make semaphore)
   if (semd == -1)
     printf("error %d: %s\n", errno, strerror(errno));
   else

@@ -29,7 +29,6 @@ int main()
 {
   int locations[15];
   create();//create shared memory to store locations
-  perror("error creating");
   
   int deck[81];
   int pid = getpid();
@@ -39,8 +38,7 @@ int main()
   place[0] = 12;
 
   write_line(place, locations, 0);
-  printf("%d\n", view(locations));
-  perror("error writing");
+  //perror("error writing");
   
   char * buf = malloc(2048 * sizeof(char));
   from_client = server_handshake( &to_client );

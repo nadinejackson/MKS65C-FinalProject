@@ -123,7 +123,7 @@ void print_twelve (int * locations , int * values, char * buf) {
 	  for(c = 0; c < 4; c++)
 	    {
 	      //card edges
-	      strcat(buf, "|");
+	      strcat(buf, "| ");
 
 	      d = nums[4 * a + c];
 
@@ -149,7 +149,7 @@ void print_twelve (int * locations , int * values, char * buf) {
 	      //card edges (white)
 	      sprintf(temp, "%c[0m", (char) 27);
 	      strcat(buf, temp);
-	      strcat(buf, "| ");
+	      strcat(buf, " |\t");
 	    }
 	  strcat(buf, "\n");
 	}
