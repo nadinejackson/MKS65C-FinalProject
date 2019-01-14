@@ -1,6 +1,6 @@
 #include "pipe_networking.h"
 #include "game.c"
-void play(char * buf, int vals[], int locations[])
+void play(char * buf, int vals[], int locations[], int place[])
 {
   int positions[3];
   char temp[10];
@@ -10,7 +10,11 @@ void play(char * buf, int vals[], int locations[])
       if(set_check(vals[ locations[ positions[0] ] ],
 		   vals[ locations[ positions[1] ] ],
 		   vals[ locations[ positions[2] ] ]))
-	strcat(buf, " yes, that's a set. gg.\n");
+
+	{
+	  strcat(buf, " yes, that's a set. gg.\n");
+	  replace(locations, place, positions);
+	}
       else
 	strcat(buf, " no, that wasn't a set. bg.\n");
     }
@@ -40,7 +44,7 @@ int main()
 	{
 	  if (read(from_client, buf, 1024 * sizeof(char)))
 	    {
-	      play(buf, deck, locations);
+	      play(buf, deck, locations, place);
 	      write(to_client, buf, 1024 * sizeof(char));
 	    }
 	  else

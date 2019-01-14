@@ -107,7 +107,7 @@ void replace (int * locations , int * placemarker , int * positionToReplace ) {
     int i;
     for ( i=0 ; i<3 ; i++ ) {
         locations[ positionToReplace[i] ] = *placemarker; //not values[placemarker]
-        placemarker++;
+        (*placemarker)++;
     }
 }
 
@@ -144,6 +144,12 @@ void swap(int vals[])
       vals[i] = r;
       c--;
     }
+}
+void swap_test(int vals[])
+{
+  int c = 81;
+  while(c--)
+    vals[c] = c;
 }
 
 
