@@ -2,17 +2,16 @@
 #include "game.c"
 #include "files.c"
 
-void play(char * buf, int vals[], int locations[], int place[], int points[])
+void play(char * buf, int vals[], int locations[], int place[], int points[], int fifteen[])
 {
   int positions[3]; //stores the cards the user chose
-
-  /*
-  if(!strcmp(buf, "3"))
+  if(!strcmp(buf, "3") && !(*fifteen))
     {
-      play_fifteen(char * buf, int vals[], int locations[], int place[], int points[]);
+      *fifteen = 1;
+      plus_three(locations, place);
+      buf[0] = '\0';
     }
-  */
-  if(strcmp(buf, "r") && strcmp(buf, "h")) //r for refresh and h for help
+  else if(strcmp(buf, "r") && strcmp(buf, "h")) //r for refresh and h for help
     {
       if (input_to_board_positions(buf, positions)) //storing the positions on the board of the user's input
 	{
@@ -22,7 +21,13 @@ void play(char * buf, int vals[], int locations[], int place[], int points[])
 		       vals[ locations[ positions[2] ] ])) //check if user input is a valid set
 
 	    {
-	      replace(locations, place, positions); //put new cards in the display
+	      if (*fifteen)
+		{
+		  replace_fifteen(locations, positions); //put new cards in the display
+		  *fifteen = 0;
+		}
+	      else
+		replace(locations, place, positions);
 	      if(check(locations, place, 1) > 1) //check if the other player found a set
 		{
 		  strcpy(buf, "You found a set! Good job! Plus one point.\n");
@@ -57,7 +62,11 @@ void play(char * buf, int vals[], int locations[], int place[], int points[])
       strcpy(buf, "Refreshed.\n"); //refresh
       update_loss(locations, place, positions);
     }
-  print_twelve(locations, vals, buf); //add the cards
+  printf("get ready to print\n");
+  if(*fifteen)
+      print_fifteen(locations, vals, buf); //add the cards
+  else
+    print_twelve(locations, vals, buf); //add the cards
 }
 int main()
 {
@@ -70,7 +79,7 @@ int main()
   int from_client;
   int place[1];
   place[0] = 12;
-
+  int fifteen[1] = {0};
   
   char * buf = malloc(2048 * sizeof(char));
   from_client = server_handshake( &to_client );
@@ -83,7 +92,7 @@ int main()
 	{
 	  if (read(from_client, buf, 1024 * sizeof(char)))
 	    {
-	      play(buf, deck, locations, place, points);
+	      play(buf, deck, locations, place, points, fifteen);
 	      write(to_client, buf, 1024 * sizeof(char));
 	    }
 	  else
