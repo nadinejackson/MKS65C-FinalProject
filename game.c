@@ -164,13 +164,17 @@ char * print_fifteen (int * locations , int * values) {
     strcpy(board, "");
     
     int i, j;
+    int k = 12;
     for ( i=0 ; i<3 ; i++ ) {
-        for ( j=0 ; j<5 ; j++ ) {
+        for ( j=0 ; j<4 ; j++ ) {
             sprintf( temp, "%d\t", values[ locations[5*i+j] ] );
             strcat(board, temp);
             
         }
+        sprintf( temp, "%d\t", values[ locations[k] ] );
+        strcat(board, temp);
         strcat(board, "\n");
+        k++;
     }
 
     return board;
