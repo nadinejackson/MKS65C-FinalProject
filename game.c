@@ -176,7 +176,7 @@ void print_fifteen (int * locations , int * values, char * buf) {
     {
       for(b = 0; b < 3; b++)
 	{
-	  for(c = 0; c < 5; c++)
+	  for(c = 0; c < 4; c++)
 	    {
 	      //card edges
 	      strcat(buf, "| ");
@@ -206,7 +206,36 @@ void print_fifteen (int * locations , int * values, char * buf) {
 	      sprintf(temp, "%c[0m", (char) 27);
 	      strcat(buf, temp);
 	      strcat(buf, " |\t");
-	    } 
+	    }
+	  
+	  //card edges
+	  strcat(buf, "| ");
+
+	  d = nums[12 + a];
+
+	  if (d % 3 == 0)
+	    {
+	      if (b == 1)
+		symbol( d / 3, buf );
+	      else
+		strcat(buf, " ");
+	    }
+	  else if (d % 3 == 1)
+	    {
+	      if (b == 2)
+		strcat(buf, " ");
+	      else
+		symbol(d / 3, buf);
+	    }
+	  else
+	    symbol(d / 3, buf);
+
+	  d /= 3;
+	      
+	  //card edges (white)
+	  sprintf(temp, "%c[0m", (char) 27);
+	  strcat(buf, temp);
+	  strcat(buf, " |\t");
 	  strcat(buf, "\n");
 	}
       strcat(buf, "\n");

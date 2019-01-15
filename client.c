@@ -22,11 +22,15 @@ int main() {
 	  perror("error reading");
 	  exit(0);
 	}
-      printf("Please type the letters corresponding to a set and press enter.\nEnter r to refresh.\nEnter h for help.\n");
-      fscanf(stdin, "%[^\n]s", line);
-      fscanf(stdin, "%c", junk);
-      write(to_server, line, 1024 * sizeof(char));
-      
+      if (strcmp(line, "Game Over!"))
+	{
+	  printf("Please type the letters corresponding to a set and press enter.\nEnter r to refresh.\nEnter h for help.\nEnter 3 to add cards.\n");
+	  fscanf(stdin, "%[^\n]s", line);
+	  fscanf(stdin, "%c", junk);
+	  write(to_server, line, 1024 * sizeof(char));
+	}
+      else
+	break;
     }
   return 0;
 }

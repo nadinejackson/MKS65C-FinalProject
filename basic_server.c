@@ -83,7 +83,7 @@ int main()
   
   char * buf = malloc(2048 * sizeof(char));
   from_client = server_handshake( &to_client );
-  swap(deck);
+  swap_test(deck);
   deal_initial(locations);
 
   while(1)
@@ -92,8 +92,13 @@ int main()
 	{
 	  if (read(from_client, buf, 1024 * sizeof(char)))
 	    {
-	      play(buf, deck, locations, place, points, fifteen);
-	      write(to_client, buf, 1024 * sizeof(char));
+	      if(*place < 81)
+		{
+		  play(buf, deck, locations, place, points, fifteen);
+		  write(to_client, buf, 1024 * sizeof(char));
+		}
+	      else
+		write(to_client, "Game Over!", 1024 * sizeof(char));
 	    }
 	  else
 	    exit(0);
