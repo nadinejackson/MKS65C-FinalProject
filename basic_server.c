@@ -62,7 +62,7 @@ void play(char * buf, int vals[], int locations[], int place[], int points[], in
       strcpy(buf, "Refreshed.\n"); //refresh
       update_loss(locations, place, positions);
     }
-  printf("get ready to print\n");
+  //printf("get ready to print\n");
   if(*fifteen)
       print_fifteen(locations, vals, buf); //add the cards
   else
@@ -83,7 +83,7 @@ int main()
   
   char * buf = malloc(2048 * sizeof(char));
   from_client = server_handshake( &to_client );
-  swap_test(deck);
+  swap(deck);
   deal_initial(locations);
 
   while(1)
