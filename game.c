@@ -157,25 +157,6 @@ void print_twelve (int * locations , int * values, char * buf) {
     }
   //strcat(buf, " -  -  -  - \n");
 }
-
-
-<<<<<<< HEAD
-    char temp[100];
-    strcpy(board, "");
-    
-    int i, j;
-    int k = 12;
-    for ( i=0 ; i<3 ; i++ ) {
-        for ( j=0 ; j<4 ; j++ ) {
-            sprintf( temp, "%d\t", values[ locations[5*i+j] ] );
-            strcat(board, temp);
-            
-        }
-        sprintf( temp, "%d\t", values[ locations[k] ] );
-        strcat(board, temp);
-        strcat(board, "\n");
-        k++;
-=======
 void print_fifteen (int * locations , int * values, char * buf) {
 
   char temp[100];
@@ -185,7 +166,7 @@ void print_fifteen (int * locations , int * values, char * buf) {
   for ( i=0 ; i<15 ; i++ )
     {
       nums[i] = values[locations[i]];
->>>>>>> d8d9a2548ec3f16cf61ff418a56d559237dbd1e4
+
     }
     
   //strcat(buf, " _   _   _   _ \n");
