@@ -1,3 +1,15 @@
+Jan 15
+Raymond
+    Added project description, how to run instructions in README. Added design document to repo.
+Nadine
+    Added points to users and exits the game after all 81 cards have been shown.
+
+Jan 14
+Raymond
+    Updated the function to print the next 3 cards manually if there are no sets in the current board.
+Nadine
+    Added the ASCII representation of the next 3 cards if added manually in case of no sets in the current board.
+
 Jan 13
 Raymond
 	The game functions are in game2.c.
