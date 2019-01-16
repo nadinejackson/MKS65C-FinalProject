@@ -264,7 +264,7 @@ void plus_three ( int * locations , int * placemarker ) {
   int i;
   for ( i=0 ; i<3 ; i++ ) {
     locations[12+i] = *placemarker; //not values[placemarker]
-    placemarker++;
+    (*placemarker)++;
   }
     
 }

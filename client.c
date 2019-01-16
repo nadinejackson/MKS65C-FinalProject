@@ -8,7 +8,7 @@ int main() {
   char * junk = malloc(sizeof(char));
   char * line = malloc(1024 * sizeof(char));
   from_server = client_handshake( &to_server );
-  write(to_server, "h", 1024 * sizeof(char));
+  //write(to_server, "h", 1024 * sizeof(char));
   while(1)
     {
       //perror("error");

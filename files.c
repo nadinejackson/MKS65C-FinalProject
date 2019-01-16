@@ -13,41 +13,52 @@
 void create()
 {
   int fd = open("./.setgame", O_CREAT | O_WRONLY, 0666);
-  int locations[18] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 12, 0, 0};
-  write(fd, locations, 18 * sizeof(int));
+  int locations[30] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+  write(fd, locations, 30 * sizeof(int));
   close(fd);
 }
 
 int check(int locations[], int * place, int playerno)
 {
-  int data[18];
+  int data[30];
   int fd = open("./.setgame", O_RDONLY, 0666);
-  read(fd, data, 18 * sizeof(int));
+  read(fd, data, 30 * sizeof(int));
   int retval = *place - data[15];
   close(fd);
   return retval;
 }
 
-void update(int locations[], int * place, int playerno, int points)
+int update(int locations[], int * place, int playerno)
 {
-  int data[18];
+  int data[30];
+  int points;
+
+  int fd = open("./.setgame", O_RDONLY, 0666);
+  read(fd, data, 30 * sizeof(int));
+  points = data[16 + playerno];
+  points += 1;
+  *place = data[15];
+  close(fd);
+  
   int i;
   for(i = 0; i < 15; i++)
     data[i] = locations[i];
   data[15] = *place;
-  data[16] = points;
-  int fd = open("./.setgame", O_WRONLY, 0666);
-  write(fd, data, 18 * sizeof(int));
+
+  fd = open("./.setgame", O_WRONLY, 0666);
+  write(fd, data, 30 * sizeof(int));
   close(fd);
-}
-void update_loss(int locations[], int * place, int * playerno)
+  return points;
+  }
+int update_loss(int locations[], int * place, int playerno)
 {
-  int data[18];
+  int data[30];
   int fd = open("./.setgame", O_RDONLY, 0666);
-  read(fd, data, 18 * sizeof(int));
+  read(fd, data, 30 * sizeof(int));
   int i;
   for(i = 0; i < 15; i++)
     locations[i] = data[i];
   *place = data[15];
   close(fd);
+  return data[16 + playerno];
 }

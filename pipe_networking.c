@@ -45,7 +45,7 @@ int server_handshake(int *to_client) {
       //client recieves server's message, removes private fifo
 
       //client sends response to server
-      read(from_client, buf, 1024 * sizeof(char));
+      //read(from_client, buf, 1024 * sizeof(char));
       //printf("second message recieved: %s\n", buf);  
 
       free(buf);
@@ -80,8 +80,13 @@ int client_handshake(int *to_server) {
   //printf("got a message from the server and it was this: %s\n", buf);
   remove("waaah");
 
+  printf("What is your player number? (0 to 7)\n");
+  char junk[1];
+  char line[2];
+  fscanf(stdin, "%[^\n]s", line);
+  fscanf(stdin, "%c", junk);
   //client sends a response to the server
-  write(ts, "check", 1024 * sizeof(char));
+  write(ts, line, 1024 * sizeof(char));
 
   free(buf);
   return from_server;
